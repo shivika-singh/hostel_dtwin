@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hostel Digital Twin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .room {
+      background: #ffffff;
+      width: 260px;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .room h3 {
+      margin-top: 0;
+      color: #34495e;
+    }
+
+    .occupied {
+      color: green;
+      font-weight: bold;
+    }
+
+    .empty {
+      color: red;
+      font-weight: bold;
+    }
+
+    .status {
+      margin: 5px 0;
+    }
+
+    .analytics {
+      margin-top: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🏠 Hostel Digital Twin Dashboard</h1>
+
+  <div class="container" id="rooms"></div>
+
+  <div class="analytics">
+    <h2>📊 Energy Analytics</h2>
+    <div id="report">Loading...</div>
+  </div>
+
+  <script>
+    async function loadLiveStatus() {
+      try {
+        const res = await fetch("http://localhost:5000/liveStatus");
+        const data = await res.json();
+
+        let html = "";
+        data.forEach(room => {
+          html += `
+            <div class="room">
+              <h3>Room ${room.room_id}</h3>
+              <p class="status">
+                Occupancy:
+                <span class="${room.occupancy ? 'occupied' : 'empty'}">
+                  ${room.occupancy ? 'Occupied' : 'Empty'}
+                </span>
+              </p>
+              <p class="status">💡 Light: ${room.light_status ? 'ON' : 'OFF'}</p>
+              <p class="status">🌀 Fan: ${room.fan_status ? 'ON' : 'OFF'}</p>
+              <p class="status">⚡ Power: ${room.power} W</p>
+            </div>
+          `;
+        });
+
+        document.getElementById("rooms").innerHTML = html;
+      } catch (err) {
+        console.error("Error loading live status", err);
+      }
+    }
+
+    async function loadEnergyReport() {
+      try {
+        const res = await fetch("http://localhost:5000/energyReport");
+        const data = await res.json();
+
+        let html = "";
+        data.forEach(item => {
+          html += `
+            <p>
+              <b>Room ${item._id}</b> →
+              Consumed: ${item.total_power} Wh |
+              Saved: ${item.total_saved} Wh
+            </p>
+          `;
+        });
+
+        document.getElementById("report").innerHTML = html;
+      } catch (err) {
+        console.error("Error loading energy report", err);
+      }
+    }
+
+    setInterval(loadLiveStatus, 3000);
+    setInterval(loadEnergyReport, 5000);
+
+    loadLiveStatus();
+    loadEnergyReport();
+  </script>
+
+</body>
+</html>
