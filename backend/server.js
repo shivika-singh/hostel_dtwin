@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
+const energyAnalytics = require("./services/energyAnalytics");
+
 const digitalTwin = require("./digitalTwinState");
 const calculatePower = require("./services/energyCalculator");
 const inferRoomState = require("./services/sensorFusion");
@@ -50,6 +52,7 @@ app.post("/simulator/update", (req, res) => {
   roomState.inferredOccupancy = fusion.inferredOccupancy;
   roomState.wastage = fusion.wastage;
 
+
   // 3️⃣ Recalculate block energy
   let blockPower = 0;
   Object.values(digitalTwin.blocks[block].rooms).forEach(r => {
@@ -58,6 +61,11 @@ app.post("/simulator/update", (req, res) => {
 
   digitalTwin.blocks[block].energy.currentLoad = blockPower;
   digitalTwin.blocks[block].energy.totalEnergy += blockPower * (2 / 3600);
+energyAnalytics.updateEnergy(
+  block,
+  blockPower,
+  fusion.wastage
+);
 
   // 4️⃣ Alert generation (PER BLOCK)
   digitalTwin.blocks[block].alerts = [];
@@ -87,7 +95,9 @@ app.get("/wardenSummary", (req, res) => {
     summary[block] = {
       occupiedRooms: occupiedCount,
       totalRooms: rooms.length,
-      currentLoad: data.energy.currentLoad,
+      currentLoad_W: data.energy.currentLoad,
+      energyToday_Wh: data.energy.totalEnergy,
+      energyToday_kWh: (data.energy.totalEnergy / 1000).toFixed(3),
       wastageRooms: wastageCount,
       alerts: data.alerts
     };
@@ -95,6 +105,15 @@ app.get("/wardenSummary", (req, res) => {
 
   res.json(summary);
 });
+app.get("/testEnergy/:block", (req, res) => {
+  res.json(energyAnalytics.getBlockAnalytics(req.params.block));
+});
+
+app.get("/energyAnalytics/:block", (req, res) => {
+  const block = req.params.block;
+  res.json(energyAnalytics.getBlockAnalytics(block));
+});
+
 app.post("/control/room", (req, res) => {
   const { block, room, light, fan } = req.body;
 

@@ -1,29 +1,30 @@
 import { useEffect, useState } from "react";
+import BlockComparisonTable from "../components/BlockComparisonTable";
 
 export default function Admin() {
   const [summary, setSummary] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSummary = async () => {
       const res = await fetch("http://localhost:5000/wardenSummary");
       const data = await res.json();
       setSummary(data);
     };
 
-    fetchData();
-    const interval = setInterval(fetchData, 3000);
+    fetchSummary();
+    const interval = setInterval(fetchSummary, 3000);
     return () => clearInterval(interval);
   }, []);
 
   let totalEnergy = 0;
   let occupiedRooms = 0;
-  let activeRooms = 0;
+  let wastageRooms = 0;
   let alerts = [];
 
   Object.values(summary).forEach(block => {
-    totalEnergy += block.currentLoad;
+    totalEnergy += Number(block.energyToday_kWh);
     occupiedRooms += block.occupiedRooms;
-    activeRooms += block.wastageRooms;
+    wastageRooms += block.wastageRooms;
     alerts = alerts.concat(block.alerts);
   });
 
@@ -34,16 +35,32 @@ export default function Admin() {
       </h2>
 
       <div className="max-w-5xl mx-auto grid grid-cols-3 gap-8">
-        <Metric title="Total Energy Today" value={`${(totalEnergy/1000).toFixed(2)} kWh`} />
-        <Metric title="Active Rooms" value={activeRooms} />
+        <Metric title="Total Energy Today" value={`${totalEnergy.toFixed(2)} kWh`} />
         <Metric title="Occupied Rooms" value={occupiedRooms} />
+        <Metric title="Wastage Rooms" value={wastageRooms} />
       </div>
+      <BlockComparisonTable summary={summary} />
 
+<div className="max-w-5xl mx-auto mt-10 bg-white p-6 rounded-xl shadow">
+  <h3 className="text-xl font-semibold mb-4">
+    🔋 Hostel Energy Summary
+  </h3>
+
+  <p>Total Energy Consumed: {totalEnergy.toFixed(2)} kWh</p>
+  <p className="text-green-600">
+    Energy Saved by Digital Twin: {(
+      Object.values(summary).reduce(
+        (a, b) => a + Number(b.energyToday_kWh), 0
+      ) * 0.9
+    ).toFixed(2)} kWh
+  </p>
+</div>
       <div className="max-w-5xl mx-auto mt-12">
         {alerts.length > 0 ? (
           <div className="bg-red-100 p-6 rounded-xl text-red-700 font-semibold">
+            <h3 className="mb-2 text-xl">⚠️ Alerts</h3>
             {alerts.map((a, i) => (
-              <p key={i}>⚠️ {a}</p>
+              <p key={i}>{a}</p>
             ))}
           </div>
         ) : (
@@ -64,3 +81,4 @@ function Metric({ title, value }) {
     </div>
   );
 }
+

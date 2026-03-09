@@ -27,5 +27,6 @@ BLOCKS.forEach(block => {
     };
   }
 });
+energyHistory: []
 
 module.exports = digitalTwin;
