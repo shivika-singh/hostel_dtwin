@@ -51,7 +51,8 @@ useEffect(() => {
 
       </div>
       <div className="max-w-4xl mx-auto mt-16">
-  <EnergyChart blockData={blockData} />
+  <EnergyChart blockId={id} />
+
 
 </div>
 <div className="max-w-4xl mx-auto mt-8">
