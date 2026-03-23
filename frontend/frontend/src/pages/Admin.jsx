@@ -6,7 +6,7 @@ export default function Admin() {
 
   useEffect(() => {
     const fetchSummary = async () => {
-      const res = await fetch("http://localhost:5000/wardenSummary");
+      const res = await fetch("http://localhost:5001/wardenSummary");
       const data = await res.json();
       setSummary(data);
     };
@@ -38,6 +38,12 @@ export default function Admin() {
         <Metric title="Total Energy Today" value={`${totalEnergy.toFixed(2)} kWh`} />
         <Metric title="Occupied Rooms" value={occupiedRooms} />
         <Metric title="Wastage Rooms" value={wastageRooms} />
+      </div>
+
+      <div className="max-w-5xl mx-auto grid grid-cols-3 gap-8 mt-6">
+        <Metric title="Carbon Today" value={`${(totalEnergy * 0.82).toFixed(3)} kg CO₂`} />
+        <Metric title="Annual Carbon" value={`${(totalEnergy * 0.82 * 365).toFixed(1)} kg CO₂`} />
+        <Metric title="Annual Cost" value={`Rs. ${(totalEnergy * 8 * 365).toFixed(0)}`} />
       </div>
       <BlockComparisonTable summary={summary} />
 

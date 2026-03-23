@@ -5,7 +5,7 @@ export default function FloorMap() {
 
   useEffect(() => {
     const fetchTwin = async () => {
-      const res = await fetch("http://localhost:5000/digitalTwinState");
+      const res = await fetch("http://localhost:5001/digitalTwinState");
       const data = await res.json();
       setTwin(data.blocks);
     };

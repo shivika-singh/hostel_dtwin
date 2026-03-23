@@ -79,7 +79,7 @@
   <script>
     async function loadLiveStatus() {
       try {
-        const res = await fetch("http://localhost:5000/liveStatus");
+        const res = await fetch("http://localhost:5001/liveStatus");
         const data = await res.json();
 
         let html = "";
@@ -108,7 +108,7 @@
 
     async function loadEnergyReport() {
       try {
-        const res = await fetch("http://localhost:5000/energyReport");
+        const res = await fetch("http://localhost:5001/energyReport");
         const data = await res.json();
 
         let html = "";

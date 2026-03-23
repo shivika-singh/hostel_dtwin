@@ -15,6 +15,7 @@ export default function Navbar() {
           <Link to="/map">Twin Map</Link>
           <Link to="/boys">Boys</Link>
           <Link to="/girls">Girls</Link>
+          <Link to="/simulation">Simulate</Link>
         </div>
 
       </div>

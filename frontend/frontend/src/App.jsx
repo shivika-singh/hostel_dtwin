@@ -9,6 +9,7 @@ import Block from "./pages/Block";
 import Room from "./pages/Room";
 import Admin from "./pages/Admin";
 import FloorMap from "./pages/FloorMap";
+import Simulation from "./pages/Simulation";
 
 
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/room/:id" element={<Room />} />
         <Route path="/admin" element={<Admin />} />
         <Route path="/map" element={<FloorMap />} />
+        <Route path="/simulation" element={<Simulation />} />
 
 
 

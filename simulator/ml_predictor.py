@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.linear_model import LogisticRegression
 import requests
 
-API_FETCH = "http://localhost:5000/liveStatus"
+API_FETCH = "http://localhost:5001/liveStatus"
 
 # dummy training data (represents past occupancy behavior)
 data = {

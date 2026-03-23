@@ -2,7 +2,7 @@ import requests
 import random
 import time
 
-API_URL = "http://localhost:5000/updateData"
+API_URL = "http://localhost:5001/updateData"
 ROOMS = ["R101", "R102", "R103"]
 
 while True:

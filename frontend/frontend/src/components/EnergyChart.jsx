@@ -6,7 +6,7 @@ export default function EnergyChart({ blockId }) {
 
   useEffect(() => {
     const fetchEnergy = async () => {
-      const res = await fetch(`http://localhost:5000/energyAnalytics/${blockId}`);
+      const res = await fetch(`http://localhost:5001/energyAnalytics/${blockId}`);
       const json = await res.json();
 
       const formatted = json.energyTimeline.map(p => ({
