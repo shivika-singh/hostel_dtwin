@@ -1,93 +1,166 @@
+# ============================================================
+# SMART HOSTEL DIGITAL TWIN — LOGICAL SIMULATOR
+# Uses factual Indian parameters from indian_parameters.py
+# Sends realistic, time-aware data to backend
+# ============================================================
+
 import requests
-import random
 import time
+import random
+from datetime import datetime
+from indian_parameters import (
+    BLOCKS, ROOMS_PER_BLOCK,
+    OCCUPANCY_PROBABILITY,
+    WASTAGE_PROBABILITY_LIGHT,
+    WASTAGE_PROBABILITY_FAN,
+    TEMP_COMFORT_MIN, TEMP_COMFORT_MAX,
+    CO2_NORMAL, CO2_HIGH,
+    FAN_WATTS, LIGHT_WATTS
+)
 
-BACKEND_URL = "http://localhost:5000/simulator/update"
+BACKEND_URL = "http://localhost:5001/simulator/update"
 
-BLOCKS = ["G1", "G2", "B1", "B2"]
-ROOMS_PER_BLOCK = 10
-
-# =========================
+# ============================================================
 # ROOM STATE MEMORY
-# =========================
+# ============================================================
 state = {}
-
 for block in BLOCKS:
     state[block] = {}
     for room in range(1, ROOMS_PER_BLOCK + 1):
+        hour = datetime.now().hour
+        prob = OCCUPANCY_PROBABILITY[hour]
         state[block][room] = {
-            "occupancy": random.choice([0, 1]),
-            "temperature": random.randint(24, 30),
-            "co2": random.randint(380, 500),
-            "light": 0,
-            "fan": 0
+            "occupancy":   1 if random.random() < prob else 0,
+            "temperature": random.uniform(TEMP_COMFORT_MIN, TEMP_COMFORT_MAX),
+            "co2":         CO2_NORMAL,
+            "light":       0,
+            "fan":         0
         }
 
-# =========================
-# STATE UPDATE LOGIC
-# =========================
-def update_room(prev):
-    occ = prev["occupancy"]
+# ============================================================
+# CORE LOGIC
+# ============================================================
+def update_room(prev, hour):
+    """
+    Updates room state based on:
+    1. Time of day (class hours vs evening vs night)
+    2. Previous state (memory-based transitions)
+    3. Indian hostel behavioural patterns
+    4. Physical sensor models (CO2 accumulation, temp drift)
+    """
 
-    # Occupancy transition (memory-based)
-    if occ == 1 and random.random() < 0.1:
-        occ = 0
-    elif occ == 0 and random.random() < 0.08:
-        occ = 1
+    # --- OCCUPANCY ---
+    target_prob = OCCUPANCY_PROBABILITY[hour]
+    prev_occ = prev["occupancy"]
 
-    # CO2 logic
-    if occ == 1:
-        co2 = min(prev["co2"] + random.randint(20, 60), 1200)
+    if prev_occ == 1:
+        occupancy = 1 if random.random() < 0.90 else 0
     else:
-        co2 = max(prev["co2"] - random.randint(10, 30), 380)
+        occupancy = 1 if random.random() < target_prob * 0.5 else 0
 
-    # Temperature drift
-    temp = prev["temperature"] + random.choice([-1, 0, 1])
-    temp = max(20, min(temp, 36))
-
-    # Appliance behavior
-    if occ == 1:
-        light = 1 if random.random() < 0.8 else 0
-        fan = 1 if temp > 28 and random.random() < 0.7 else 0
+    # --- TEMPERATURE ---
+    # Jodhpur IMD average temperatures by time of day
+    if 6 <= hour <= 10:
+        base_temp = 26.0
+    elif 11 <= hour <= 16:
+        base_temp = 32.0   # Jodhpur afternoon peak
+    elif 17 <= hour <= 20:
+        base_temp = 29.0
     else:
-        # Wastage cases
-        light = 1 if random.random() < 0.15 else 0
-        fan = 1 if random.random() < 0.05 else 0
+        base_temp = 25.0
+
+    body_heat    = 1.5 if occupancy == 1 else 0
+    sensor_noise = random.uniform(-0.3, 0.3)
+    temperature  = round(base_temp + body_heat + sensor_noise, 1)
+
+    # --- CO2 ---
+    # ASHRAE 62.1 — 2 people in 120 sqft room
+    if occupancy == 1:
+        co2 = min(prev["co2"] + random.randint(15, 45), CO2_HIGH)
+    else:
+        co2 = max(prev["co2"] - random.randint(10, 25), CO2_NORMAL)
+    co2 = round(co2)
+
+    # --- APPLIANCES ---
+    if occupancy == 1:
+        light = 1 if random.random() < 0.85 else 0
+        if temperature > 28:
+            fan = 1 if random.random() < 0.80 else 0
+        else:
+            fan = 1 if random.random() < 0.40 else 0
+    else:
+        # Wastage — student forgot to switch off
+        light = 1 if random.random() < WASTAGE_PROBABILITY_LIGHT else 0
+        fan   = 1 if random.random() < WASTAGE_PROBABILITY_FAN   else 0
 
     return {
-        "occupancy": occ,
-        "temperature": temp,
-        "co2": co2,
-        "light": light,
-        "fan": fan
+        "occupancy":   occupancy,
+        "temperature": temperature,
+        "co2":         co2,
+        "light":       light,
+        "fan":         fan
     }
 
-# =========================
+# ============================================================
 # MAIN LOOP
-# =========================
-print("Backend-centric Digital Twin Simulator started")
+# ============================================================
+print("=" * 60)
+print("  SMART HOSTEL SIMULATOR — India Standard Parameters")
+print("  Location : Jodhpur, Rajasthan")
+print(f"  Blocks   : {BLOCKS}")
+print(f"  Rooms    : {ROOMS_PER_BLOCK} per block = "
+      f"{len(BLOCKS) * ROOMS_PER_BLOCK} total")
+print("=" * 60)
 
 while True:
+    hour = datetime.now().hour
+
     for block in BLOCKS:
         for room in range(1, ROOMS_PER_BLOCK + 1):
-            new_state = update_room(state[block][room])
+
+            new_state = update_room(state[block][room], hour)
             state[block][room] = new_state
 
+            power = (LIGHT_WATTS if new_state["light"] else 0) + \
+                    (FAN_WATTS   if new_state["fan"]   else 0)
+
+            wastage = (not new_state["occupancy"]) and \
+                      (new_state["light"] or new_state["fan"])
+
             payload = {
-                "block": block,
-                "room": room,
-                "occupancy": new_state["occupancy"],
+                "block":       block,
+                "room":        room,
+                "occupancy":   new_state["occupancy"],
                 "temperature": new_state["temperature"],
-                "co2": new_state["co2"],
-                "light": new_state["light"],
-                "fan": new_state["fan"]
+                "co2":         new_state["co2"],
+                "light":       new_state["light"],
+                "fan":         new_state["fan"],
+                "power":       power,
+                "wastage":     wastage,
+                "hour":        hour
             }
 
             try:
                 requests.post(BACKEND_URL, json=payload, timeout=1)
-            except:
-                print("Backend not reachable")
+                if wastage:
+                    status = "⚠️  WASTAGE"
+                elif new_state["occupancy"]:
+                    status = "🟢 OCCUPIED"
+                else:
+                    status = "⚪ EMPTY"
 
-            time.sleep(0.3)  # stagger rooms
+                print(
+                    f"{block}-R{room:02d} | "
+                    f"T:{new_state['temperature']:4.1f}°C | "
+                    f"CO2:{new_state['co2']:4d}ppm | "
+                    f"💡{'ON ' if new_state['light'] else 'OFF'} | "
+                    f"🌀{'ON ' if new_state['fan'] else 'OFF'} | "
+                    f"{power:3d}W | {status}"
+                )
+            except Exception:
+                print(f"  Backend not reachable — is server.js running?")
 
-        time.sleep(1.5)  # stagger blocks
+            time.sleep(5)
+
+    print("-" * 60)
+    time.sleep(10)

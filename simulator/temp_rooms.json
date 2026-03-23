@@ -1,0 +1,419 @@
+{
+  "strategyId": 4,
+  "roomsData": {
+    "G1": {
+      "G1-1": {
+        "occupancy": 0,
+        "temperature": 31.9,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258481342,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G1-2": {
+        "occupancy": 0,
+        "temperature": 31.9,
+        "co2": 400,
+        "light": 1,
+        "fan": 1,
+        "power": 110,
+        "lastUpdated": 1774258486351,
+        "inferredOccupancy": "EMPTY",
+        "wastage": true
+      },
+      "G1-3": {
+        "occupancy": 1,
+        "temperature": 33.4,
+        "co2": 422,
+        "light": 1,
+        "fan": 1,
+        "power": 110,
+        "lastUpdated": 1774258491362,
+        "inferredOccupancy": "OCCUPIED",
+        "wastage": false
+      },
+      "G1-4": {
+        "occupancy": 0,
+        "temperature": 32.3,
+        "co2": 400,
+        "light": 1,
+        "fan": 1,
+        "power": 110,
+        "lastUpdated": 1774258496374,
+        "inferredOccupancy": "EMPTY",
+        "wastage": true
+      },
+      "G1-5": {
+        "occupancy": 1,
+        "temperature": 33.4,
+        "co2": 443,
+        "light": 1,
+        "fan": 1,
+        "power": 110,
+        "lastUpdated": 1774258501386,
+        "inferredOccupancy": "OCCUPIED",
+        "wastage": false
+      },
+      "G1-6": {
+        "occupancy": 0,
+        "temperature": 31.9,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258506394,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G1-7": {
+        "occupancy": 0,
+        "temperature": 32.3,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258511402,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G1-8": {
+        "occupancy": 0,
+        "temperature": 32,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258516411,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G1-9": {
+        "occupancy": 0,
+        "temperature": 32.2,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258521420,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G1-10": {
+        "occupancy": 1,
+        "temperature": 33.5,
+        "co2": 438,
+        "light": 1,
+        "fan": 1,
+        "power": 110,
+        "lastUpdated": 1774258526431,
+        "inferredOccupancy": "OCCUPIED",
+        "wastage": false
+      }
+    },
+    "G2": {
+      "G2-1": {
+        "occupancy": 0,
+        "temperature": 32.2,
+        "co2": 400,
+        "light": 1,
+        "fan": 0,
+        "power": 40,
+        "lastUpdated": 1774258531438,
+        "inferredOccupancy": "EMPTY",
+        "wastage": true
+      },
+      "G2-2": {
+        "occupancy": 0,
+        "temperature": 32.1,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258536448,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G2-3": {
+        "occupancy": 1,
+        "temperature": 33.4,
+        "co2": 432,
+        "light": 1,
+        "fan": 1,
+        "power": 110,
+        "lastUpdated": 1774258541459,
+        "inferredOccupancy": "OCCUPIED",
+        "wastage": false
+      },
+      "G2-4": {
+        "occupancy": 0,
+        "temperature": 32,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258546468,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G2-5": {
+        "occupancy": 0,
+        "temperature": 31.8,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258551475,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G2-6": {
+        "occupancy": 1,
+        "temperature": 33.7,
+        "co2": 444,
+        "light": 0,
+        "fan": 1,
+        "power": 70,
+        "lastUpdated": 1774258556485,
+        "inferredOccupancy": "OCCUPIED",
+        "wastage": false
+      },
+      "G2-7": {
+        "occupancy": 0,
+        "temperature": 32.3,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258561497,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G2-8": {
+        "occupancy": 0,
+        "temperature": 31.8,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258566502,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "G2-9": {
+        "occupancy": 0,
+        "temperature": 31.9,
+        "co2": 400,
+        "light": 0,
+        "fan": 1,
+        "power": 70,
+        "lastUpdated": 1774258571511,
+        "inferredOccupancy": "EMPTY",
+        "wastage": true
+      },
+      "G2-10": {
+        "occupancy": 0,
+        "temperature": 31.8,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258448770,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      }
+    },
+    "B1": {
+      "B1-1": {
+        "occupancy": 1,
+        "temperature": 33.4,
+        "co2": 500,
+        "light": 1,
+        "fan": 0,
+        "power": 40,
+        "lastUpdated": 1774258453782,
+        "inferredOccupancy": "OCCUPIED",
+        "wastage": false
+      },
+      "B1-2": {
+        "occupancy": 0,
+        "temperature": 32.2,
+        "co2": 400,
+        "light": 1,
+        "fan": 0,
+        "power": 40,
+        "lastUpdated": 1774258458793,
+        "inferredOccupancy": "EMPTY",
+        "wastage": true
+      },
+      "B1-3": {
+        "occupancy": 0,
+        "temperature": 32.3,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258463804,
+        "inferredOccupancy": "EMPTY",
+        "wastage": false
+      },
+      "B1-4": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B1-5": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B1-6": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B1-7": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B1-8": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B1-9": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B1-10": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      }
+    },
+    "B2": {
+      "B2-1": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-2": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-3": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-4": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-5": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-6": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-7": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-8": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-9": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      },
+      "B2-10": {
+        "occupancy": 0,
+        "temperature": 25,
+        "co2": 400,
+        "light": 0,
+        "fan": 0,
+        "power": 0,
+        "lastUpdated": 1774258409665
+      }
+    }
+  }
+}

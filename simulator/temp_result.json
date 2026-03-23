@@ -1,0 +1,79 @@
+{
+  "strategyId": 4,
+  "strategyName": "Combined Optimisation",
+  "strategyDescription": "Applies all three strategies simultaneously: empty room cutoff + night mode + temperature control. Maximum possible energy reduction.",
+  "strategyType": "combined",
+  "baseline_kWh_year": 6044.4,
+  "baseline_carbon_year": 4956.41,
+  "baseline_cost_year": 48355.2,
+  "optimised_kWh_year": 3394.5,
+  "optimised_carbon_year": 2783.49,
+  "optimised_cost_year": 27156.0,
+  "saved_kWh_year": 2649.9,
+  "saved_carbon_year": 2172.92,
+  "saved_cost_inr_year": 21199.2,
+  "reduction_pct": 43.8,
+  "blockSavings": {
+    "G1": {
+      "baselinePower_W": 550,
+      "optimisedPower_W": 310.0,
+      "savedPower_W": 240.0,
+      "savedEnergy_kWh_year": 1576.8
+    },
+    "G2": {
+      "baselinePower_W": 290,
+      "optimisedPower_W": 166.67,
+      "savedPower_W": 123.33,
+      "savedEnergy_kWh_year": 810.3
+    },
+    "B1": {
+      "baselinePower_W": 80,
+      "optimisedPower_W": 40,
+      "savedPower_W": 40,
+      "savedEnergy_kWh_year": 262.8
+    },
+    "B2": {
+      "baselinePower_W": 0,
+      "optimisedPower_W": 0,
+      "savedPower_W": 0,
+      "savedEnergy_kWh_year": 0.0
+    }
+  },
+  "recommendation": "STRONGLY RECOMMENDED",
+  "recommendationReason": "High impact. Significant energy and carbon reduction.",
+  "beeCompliant": true,
+  "dataSources": [
+    "CEA India Grid Emission Factor 2023: 0.82 kg CO2/kWh",
+    "RERC Institutional Tariff 2023-24: \u20b98/kWh",
+    "BEE Hostel Energy Benchmark: 15-25 kWh/person/month",
+    "ASHRAE 55 Thermal Comfort Standard",
+    "NBC India 2016: Temperature threshold 28\u00b0C"
+  ],
+  "baselineMetrics": {
+    "totalPower_W": 920,
+    "wastagePower_W": 370,
+    "wastageRooms": [
+      "G1-2",
+      "G1-4",
+      "G2-1",
+      "G2-9",
+      "B1-2"
+    ],
+    "wastageRoomCount": 5,
+    "baseline_kWh_day": 16.56,
+    "baseline_kWh_year": 6044.4,
+    "wastage_kWh_day": 6.66,
+    "wastage_kWh_year": 2430.9,
+    "carbon_kg_day": 13.579,
+    "carbon_kg_year": 4956.41,
+    "cost_inr_day": 132.48,
+    "cost_inr_year": 48355.2,
+    "blockPower_W": {
+      "G1": 550,
+      "G2": 290,
+      "B1": 80,
+      "B2": 0
+    },
+    "beeCompliant": true
+  }
+}
