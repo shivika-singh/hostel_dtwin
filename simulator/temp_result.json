@@ -1,46 +1,46 @@
 {
-  "strategyId": 3,
-  "strategyName": "Temperature-Based Fan Control",
-  "strategyDescription": "Fan runs only when room temperature exceeds 28\u00b0C. Below threshold, fan is auto-switched off. Based on ASHRAE 55 thermal comfort standard.",
-  "strategyType": "threshold",
+  "strategyId": 2,
+  "strategyName": "Night Mode (11PM - 5AM)",
+  "strategyDescription": "Reduce all fans to low speed (35W) between 11PM and 5AM. Lights in common areas switched off. Students can override manually.",
+  "strategyType": "schedule",
   "baseline_kWh_year": 13665.6,
   "baseline_carbon_year": 11205.79,
   "baseline_cost_year": 109324.8,
-  "optimised_kWh_year": 8146.8,
-  "optimised_carbon_year": 6680.38,
-  "optimised_cost_year": 65174.4,
-  "saved_kWh_year": 5518.8,
-  "saved_carbon_year": 4525.42,
-  "saved_cost_inr_year": 44150.4,
-  "reduction_pct": 40.4,
+  "optimised_kWh_year": 12745.8,
+  "optimised_carbon_year": 10451.56,
+  "optimised_cost_year": 101966.4,
+  "saved_kWh_year": 919.8,
+  "saved_carbon_year": 754.24,
+  "saved_cost_inr_year": 7358.4,
+  "reduction_pct": 6.7,
   "blockSavings": {
     "G1": {
       "baselinePower_W": 520,
-      "optimisedPower_W": 240,
-      "savedPower_W": 280,
-      "savedEnergy_kWh_year": 1839.6
+      "optimisedPower_W": 473.33,
+      "savedPower_W": 46.67,
+      "savedEnergy_kWh_year": 306.6
     },
     "G2": {
       "baselinePower_W": 460,
-      "optimisedPower_W": 320,
-      "savedPower_W": 140,
-      "savedEnergy_kWh_year": 919.8
+      "optimisedPower_W": 436.67,
+      "savedPower_W": 23.33,
+      "savedEnergy_kWh_year": 153.3
     },
     "B1": {
       "baselinePower_W": 490,
-      "optimisedPower_W": 280,
-      "savedPower_W": 210,
-      "savedEnergy_kWh_year": 1379.7
+      "optimisedPower_W": 455.0,
+      "savedPower_W": 35.0,
+      "savedEnergy_kWh_year": 229.95
     },
     "B2": {
       "baselinePower_W": 610,
-      "optimisedPower_W": 400,
-      "savedPower_W": 210,
-      "savedEnergy_kWh_year": 1379.7
+      "optimisedPower_W": 575.0,
+      "savedPower_W": 35.0,
+      "savedEnergy_kWh_year": 229.95
     }
   },
-  "recommendation": "STRONGLY RECOMMENDED",
-  "recommendationReason": "High impact. Significant energy and carbon reduction.",
+  "recommendation": "CONSIDER",
+  "recommendationReason": "Low impact. Useful as supplementary measure.",
   "beeCompliant": true,
   "dataSources": [
     "CEA India Grid Emission Factor 2023: 0.82 kg CO2/kWh",
