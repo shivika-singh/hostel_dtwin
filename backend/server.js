@@ -6,7 +6,7 @@ const energyAnalytics = require("./services/energyAnalytics");
 const digitalTwin = require("./digitalTwinState");
 const calculatePower = require("./services/energyCalculator");
 const inferRoomState = require("./services/sensorFusion");
-
+const { startLogging } = require("./dataLogger");
 const alarmHistory = [];
 
 const app = express();
@@ -95,27 +95,101 @@ app.post("/simulator/update", (req, res) => {
   if (!digitalTwin.blocks[block].alerts) {
     digitalTwin.blocks[block].alerts = [];
   }
+// ── SMART ALERT LOGIC ──────────────────────────────────────
+// Rule 1: Only alert wastage when room is EMPTY
+// Rule 2: Never alert occupied rooms for normal appliance use
+// Rule 3: Alert on electrical overload for fire safety
 
-  Object.entries(digitalTwin.blocks[block].rooms).forEach(([id, r]) => {
+const SAFE_BLOCK_LOAD_W = 1200;  // IE Rules 1956 safe limit
+let blockLoad = 0;
 
-    if (r.wastage) {
+Object.entries(digitalTwin.blocks[block].rooms).forEach(([id, r]) => {
+  blockLoad += r.power || 0;
 
+  // WASTAGE ALERT — only when room is empty
+  if (r.wastage && !r.occupancy) {
+    const existing = alarmHistory.find(
+      a => a.room === id && a.type === "WASTAGE" && !a.acknowledged
+    );
+    if (!existing) {
       const alarm = {
         block,
         room: id,
-        message: `Energy wastage detected in ${id}`,
+        type: "WASTAGE",
+        message: `Empty room ${id}: appliances left ON (${r.power}W wasted)`,
         severity: "WARNING",
+        wattageWasted: r.power,
         time: new Date().toISOString(),
         acknowledged: false
       };
-
       digitalTwin.blocks[block].alerts.push(alarm.message);
-
       alarmHistory.push(alarm);
-
     }
+  }
 
+  // CO2 AIR QUALITY ALERT — occupied room with poor air
+  if (r.occupancy && r.co2 > 1000) {
+    const alarm = {
+      block,
+      room: id,
+      type: "AIR_QUALITY",
+      message: `Room ${id}: CO2 at ${r.co2}ppm. Open window or increase ventilation.`,
+      severity: "WARNING",
+      co2Level: r.co2,
+      time: new Date().toISOString(),
+      acknowledged: false
+    };
+    alarmHistory.push(alarm);
+  }
+});
+
+// ELECTRICAL OVERLOAD ALERT — fire safety
+const loadPercent = (blockLoad / SAFE_BLOCK_LOAD_W) * 100;
+
+if (loadPercent >= 100) {
+  alarmHistory.push({
+    block,
+    room: "BLOCK-LEVEL",
+    type: "EMERGENCY",
+    message: `⚡ EMERGENCY: Block ${block} has EXCEEDED safe load limit (${blockLoad}W / ${SAFE_BLOCK_LOAD_W}W). Electrical hazard risk. Immediate action required.`,
+    severity: "EMERGENCY",
+    loadW: blockLoad,
+    loadPercent: Math.round(loadPercent),
+    time: new Date().toISOString(),
+    acknowledged: false
   });
+} else if (loadPercent >= 95) {
+  alarmHistory.push({
+    block,
+    room: "BLOCK-LEVEL",
+    type: "CRITICAL",
+    message: `🔴 CRITICAL: Block ${block} at ${Math.round(loadPercent)}% of safe electrical load (${blockLoad}W). Cut non-essential load now.`,
+    severity: "CRITICAL",
+    loadW: blockLoad,
+    loadPercent: Math.round(loadPercent),
+    time: new Date().toISOString(),
+    acknowledged: false
+  });
+} else if (loadPercent >= 80) {
+  const existing = alarmHistory.find(
+    a => a.block === block && a.type === "WARNING_LOAD" &&
+    (Date.now() - new Date(a.time).getTime()) < 300000
+  );
+  if (!existing) {
+    alarmHistory.push({
+      block,
+      room: "BLOCK-LEVEL",
+      type: "WARNING_LOAD",
+      message: `🟡 WARNING: Block ${block} at ${Math.round(loadPercent)}% of safe electrical load (${blockLoad}W). Monitor closely.`,
+      severity: "WARNING",
+      loadW: blockLoad,
+      loadPercent: Math.round(loadPercent),
+      time: new Date().toISOString(),
+      acknowledged: false
+    });
+  }
+}
+
 
   res.json({ status: "Digital Twin updated" });
 
@@ -236,36 +310,56 @@ const fs = require("fs");
 
 // GET all available strategies
 app.get("/strategies", (req, res) => {
-  const strategies = [
-    {
-      id: 1,
-      name: "Empty Room Cutoff",
-      description: "Immediately cut power to fans and lights in all unoccupied rooms.",
-      type: "occupancy",
-      beeAligned: true
-    },
-    {
-      id: 2,
-      name: "Night Mode (11PM - 5AM)",
-      description: "Reduce all fans to low speed (35W) between 11PM and 5AM.",
-      type: "schedule",
-      beeAligned: true
-    },
-    {
-      id: 3,
-      name: "Temperature-Based Fan Control",
-      description: "Fan runs only when room temperature exceeds 28°C (ASHRAE 55).",
-      type: "threshold",
-      beeAligned: true
-    },
-    {
-      id: 4,
-      name: "Combined Optimisation",
-      description: "Applies all three strategies simultaneously for maximum reduction.",
-      type: "combined",
-      beeAligned: true
-    }
-  ];
+ const strategies = [
+  {
+    id: 1,
+    name: "Empty Room Cutoff",
+    description: "Immediately cut power to fans and lights in all unoccupied rooms.",
+    type: "occupancy",
+    icon: "🚫",
+    beeAligned: true
+  },
+  {
+    id: 2,
+    name: "Night Mode (11PM - 5AM)",
+    description: "Reduce all fans to low speed (35W) between 11PM and 5AM.",
+    type: "schedule",
+    icon: "🌙",
+    beeAligned: true
+  },
+  {
+    id: 3,
+    name: "Temperature-Based Fan Control",
+    description: "Fan runs only when room temperature exceeds 28°C (ASHRAE 55).",
+    type: "threshold",
+    icon: "🌡️",
+    beeAligned: true
+  },
+  {
+    id: 4,
+    name: "Combined Optimisation",
+    description: "Applies strategies 1+2+3 simultaneously for maximum reduction.",
+    type: "combined",
+    icon: "⚡",
+    beeAligned: true
+  },
+  {
+    id: 5,
+    name: "Vacancy Timeout (10-Minute Rule)",
+    description: "Cut power only after room has been empty for 10 continuous minutes. Prevents false cutoffs when student briefly steps out.",
+    type: "occupancy_timeout",
+    icon: "⏱️",
+    beeAligned: true
+  },
+  {
+    id: 6,
+    name: "Electrical Load Balancing",
+    description: "Cap each block at 80% of safe load limit (IE Rules 1956). Prevents overload, short circuits, and fire risk by shedding non-essential load first.",
+    type: "safety",
+    icon: "🔌",
+    beeAligned: true
+  }
+];
   res.json(strategies);
 });
 
@@ -355,10 +449,79 @@ app.get("/baseline", (req, res) => {
     }
   });
 });
+// GET context-aware strategy suggestions
+app.get("/suggest-strategies", (req, res) => {
+  const roomsData = {};
+  Object.entries(digitalTwin.blocks).forEach(([block, data]) => {
+    roomsData[block] = data.rooms;
+  });
+
+  const tempInput = path.join(__dirname, "../simulator/temp_suggest.json");
+  const tempOutput = path.join(__dirname, "../simulator/temp_suggestion_result.json");
+
+  fs.writeFileSync(tempInput, JSON.stringify({ roomsData }, null, 2));
+
+  const pythonPath = path.join(__dirname, "../simulator/venv/bin/python3");
+  const scriptPath = path.join(__dirname, "../simulator/run_suggestion.py");
+
+  execFile(pythonPath, [scriptPath], { timeout: 10000 }, (err, stdout, stderr) => {
+    if (err) return res.status(500).json({ error: "Suggestion failed", detail: stderr });
+    try {
+      const result = JSON.parse(fs.readFileSync(tempOutput, "utf8"));
+      res.json(result);
+    } catch (e) {
+      res.status(500).json({ error: "Could not parse suggestion result" });
+    }
+  });
+});
+
+// POST apply strategy to Digital Twin (preview mode)
+app.post("/apply-strategy", (req, res) => {
+  const { strategyId } = req.body;
+  if (!strategyId) return res.status(400).json({ error: "strategyId required" });
+
+  // Mark strategy as applied in DT — does NOT deploy to real system
+  Object.entries(digitalTwin.blocks).forEach(([block, data]) => {
+    Object.entries(data.rooms).forEach(([roomId, room]) => {
+      if (strategyId === 1 && !room.occupancy) {
+        room.light = 0;
+        room.fan = 0;
+        room.power = 0;
+        room.wastage = false;
+      }
+      if (strategyId === 2) {
+        if (room.fan === 1) room.power = 35 + (room.light ? 40 : 0);
+      }
+    });
+  });
+
+  digitalTwin.appliedStrategy = { strategyId, appliedAt: new Date().toISOString(), status: "PREVIEW" };
+  res.json({ success: true, message: "Strategy applied to Digital Twin in preview mode", strategyId });
+});
+
+// POST deploy strategy — warden approves and commits
+app.post("/deploy-strategy", (req, res) => {
+  const { strategyId } = req.body;
+  if (!strategyId) return res.status(400).json({ error: "strategyId required" });
+
+  digitalTwin.appliedStrategy = {
+    strategyId,
+    deployedAt: new Date().toISOString(),
+    status: "DEPLOYED",
+    deployedBy: "WARDEN"
+  };
+
+  res.json({
+    success: true,
+    message: `Strategy ${strategyId} deployed as active hostel energy policy`,
+    deployedAt: digitalTwin.appliedStrategy.deployedAt
+  });
+});
 /* =======================
    START SERVER
 ======================= */
 
 app.listen(5001, () => {
   console.log("Server running on port 5001");
+  startLogging(digitalTwin);  // ← add this line
 });

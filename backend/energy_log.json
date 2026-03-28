@@ -1,0 +1,101 @@
+{
+  "started": "2026-03-28T11:44:42.797Z",
+  "readings": [
+    {
+      "timestamp": "2026-03-28T11:44:47.800Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-28T12:14:42.812Z",
+      "totalPower_W": 3450,
+      "wastagePower_W": 110,
+      "wastageRooms": 2,
+      "energy_kWh_this_interval": 1.725,
+      "carbon_kg_this_interval": 1.4145,
+      "cost_inr_this_interval": 13.8,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 810,
+          "wastageRooms": 0,
+          "occupiedRooms": 8
+        },
+        "G2": {
+          "power_W": 1060,
+          "wastageRooms": 0,
+          "occupiedRooms": 10
+        },
+        "B1": {
+          "power_W": 670,
+          "wastageRooms": 1,
+          "occupiedRooms": 8
+        },
+        "B2": {
+          "power_W": 910,
+          "wastageRooms": 1,
+          "occupiedRooms": 8
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-28T12:44:42.803Z",
+      "totalPower_W": 2910,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 1.455,
+      "carbon_kg_this_interval": 1.1931,
+      "cost_inr_this_interval": 11.64,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 510,
+          "wastageRooms": 0,
+          "occupiedRooms": 8
+        },
+        "G2": {
+          "power_W": 810,
+          "wastageRooms": 0,
+          "occupiedRooms": 8
+        },
+        "B1": {
+          "power_W": 710,
+          "wastageRooms": 0,
+          "occupiedRooms": 9
+        },
+        "B2": {
+          "power_W": 880,
+          "wastageRooms": 0,
+          "occupiedRooms": 9
+        }
+      }
+    }
+  ]
+}

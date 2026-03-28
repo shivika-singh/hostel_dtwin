@@ -8,7 +8,7 @@
 #
 # This is what separates this system from simple monitoring.
 # ============================================================
-
+from datetime import datetime
 from indian_parameters import (
     FAN_WATTS, LIGHT_WATTS,
     CEA_EMISSION_FACTOR_KG_PER_KWH,
@@ -30,45 +30,52 @@ STRATEGIES = [
     {
         "id": 1,
         "name": "Empty Room Cutoff",
-        "description": (
-            "Immediately cut power to fans and lights in all "
-            "unoccupied rooms. Appliances are turned off as soon "
-            "as a room is detected empty."
-        ),
+        "description": "Immediately cut power to fans and lights in all unoccupied rooms.",
         "type": "occupancy",
         "beeAligned": True
     },
     {
         "id": 2,
         "name": "Night Mode (11PM - 5AM)",
-        "description": (
-            "Reduce all fans to low speed (35W) between 11PM and "
-            "5AM. Lights in common areas switched off. Students "
-            "can override manually."
-        ),
+        "description": "Reduce all fans to low speed (35W) between 11PM and 5AM.",
         "type": "schedule",
         "beeAligned": True
     },
     {
         "id": 3,
         "name": "Temperature-Based Fan Control",
-        "description": (
-            "Fan runs only when room temperature exceeds 28°C. "
-            "Below threshold, fan is auto-switched off. Based on "
-            "ASHRAE 55 thermal comfort standard."
-        ),
+        "description": "Fan runs only when room temperature exceeds 28°C (ASHRAE 55).",
         "type": "threshold",
         "beeAligned": True
     },
     {
         "id": 4,
         "name": "Combined Optimisation",
-        "description": (
-            "Applies all three strategies simultaneously: "
-            "empty room cutoff + night mode + temperature control. "
-            "Maximum possible energy reduction."
-        ),
+        "description": "Applies strategies 1+2+3 simultaneously for maximum reduction.",
         "type": "combined",
+        "beeAligned": True
+    },
+    {
+        "id": 5,
+        "name": "Vacancy Timeout (10-Minute Rule)",
+        "description": (
+            "Appliances switch off only after a room has been continuously "
+            "empty for 10 minutes. Prevents false cutoffs when a student "
+            "briefly steps out. Balances energy saving with occupant convenience."
+        ),
+        "type": "occupancy_timeout",
+        "beeAligned": True
+    },
+    {
+        "id": 6,
+        "name": "Electrical Load Balancing",
+        "description": (
+            "Ensures no block exceeds 80% of its safe electrical load limit "
+            "(IE Rules 1956). When a block approaches overload, non-essential "
+            "appliances in empty rooms are cut first, then low-priority loads "
+            "in occupied rooms are staggered. Prevents short circuits and fire risk."
+        ),
+        "type": "safety",
         "beeAligned": True
     }
 ]
@@ -286,6 +293,116 @@ def simulate_strategy_4(rooms_data):
     return optimised_power_w, block_power
 
 # ============================================================
+# STRATEGY 5 — VACANCY TIMEOUT (10-MINUTE RULE)
+# ============================================================
+def simulate_strategy_5(rooms_data):
+    """
+    Simulates: appliances cut only after room empty for 10+ minutes.
+    More conservative than S1 — avoids false cutoffs.
+    Models that ~60% of empty rooms have been empty long enough
+    to justify cutoff (based on occupancy transition probability).
+    """
+    # With memory-based occupancy model, a room detected empty
+    # has ~60% probability of having been empty for 10+ minutes
+    TIMEOUT_CONFIDENCE = 0.60
+
+    optimised_power_w = 0
+    block_power = {b: 0 for b in BLOCKS}
+
+    for block, rooms in rooms_data.items():
+        for room_id, room in rooms.items():
+            occupied = room.get("occupancy", 0) == 1
+
+            if occupied:
+                power = room.get("power", 0)
+            else:
+                # Only cut if room has likely been empty long enough
+                fan_on = room.get("fan", 0) == 1
+                light_on = room.get("light", 0) == 1
+                wastage_power = (FAN_WATTS if fan_on else 0) + \
+                                (LIGHT_WATTS if light_on else 0)
+                # Apply timeout confidence — not all empty rooms qualify
+                power = wastage_power * (1 - TIMEOUT_CONFIDENCE)
+
+            optimised_power_w += power
+            block_power[block] += power
+
+    return optimised_power_w, block_power
+
+
+# ============================================================
+# STRATEGY 6 — ELECTRICAL LOAD BALANCING (FIRE SAFETY)
+# ============================================================
+def simulate_strategy_6(rooms_data):
+    """
+    Simulates: cap each block at 80% of safe electrical load limit.
+    Based on IE Rules 1956 — prevents overload and short circuit risk.
+
+    Safe limit per block: 1200W (10 rooms × 120W average)
+    Target under this strategy: 80% = 960W per block maximum
+
+    Priority for load shedding:
+    1. Empty rooms with wastage — cut first (zero impact)
+    2. Empty rooms with any load — cut next
+    3. Occupied rooms above threshold — reduce fan speed only
+    """
+    SAFE_BLOCK_LIMIT_W = 1200
+    TARGET_LOAD_W = SAFE_BLOCK_LIMIT_W * 0.80  # 960W
+
+    optimised_power_w = 0
+    block_power = {b: 0 for b in BLOCKS}
+
+    for block, rooms in rooms_data.items():
+        # Calculate current block load
+        current_block_load = sum(
+            r.get("power", 0) for r in rooms.values()
+        )
+
+        if current_block_load <= TARGET_LOAD_W:
+            # Block is within safe limits — no change needed
+            for room_id, room in rooms.items():
+                p = room.get("power", 0)
+                optimised_power_w += p
+                block_power[block] += p
+        else:
+            # Block exceeds target — shed load in priority order
+            remaining_budget = TARGET_LOAD_W
+            room_powers = {}
+
+            # Priority 1: Cut empty rooms with wastage first
+            for room_id, room in rooms.items():
+                occupied = room.get("occupancy", 0) == 1
+                wastage = room.get("wastage", False)
+                power = room.get("power", 0)
+
+                if not occupied and wastage:
+                    room_powers[room_id] = 0  # cut completely
+                else:
+                    room_powers[room_id] = power
+
+            # Priority 2: Cut remaining empty room load
+            for room_id, room in rooms.items():
+                occupied = room.get("occupancy", 0) == 1
+                if not occupied and room_id in room_powers:
+                    room_powers[room_id] = 0
+
+            # Priority 3: If still over budget, reduce fan speed in occupied rooms
+            block_total = sum(room_powers.values())
+            if block_total > TARGET_LOAD_W:
+                for room_id, room in rooms.items():
+                    occupied = room.get("occupancy", 0) == 1
+                    if occupied and room.get("fan", 0) == 1:
+                        # Reduce fan from 75W to 35W
+                        current = room_powers.get(room_id, 0)
+                        room_powers[room_id] = current - (FAN_WATTS - 35)
+
+            for room_id, power in room_powers.items():
+                p = max(0, power)
+                optimised_power_w += p
+                block_power[block] += p
+
+    return optimised_power_w, block_power
+# ============================================================
 # MAIN SIMULATION RUNNER
 # Called by the backend API when warden clicks "Run Simulation"
 # ============================================================
@@ -299,11 +416,13 @@ def run_simulation(strategy_id, rooms_data, baseline):
 
     # Select and run the correct strategy
     strategy_map = {
-        1: simulate_strategy_1,
-        2: simulate_strategy_2,
-        3: simulate_strategy_3,
-        4: simulate_strategy_4
-    }
+    1: simulate_strategy_1,
+    2: simulate_strategy_2,
+    3: simulate_strategy_3,
+    4: simulate_strategy_4,
+    5: simulate_strategy_5,
+    6: simulate_strategy_6
+}
 
     if strategy_id not in strategy_map:
         return {"error": "Invalid strategy ID"}
@@ -396,4 +515,137 @@ def run_simulation(strategy_id, rooms_data, baseline):
             "ASHRAE 55 Thermal Comfort Standard",
             "NBC India 2016: Temperature threshold 28°C"
         ]
+    }
+# ============================================================
+# CONTEXT-AWARE STRATEGY SUGGESTER
+# Analyses current Digital Twin state and recommends
+# the most relevant strategies based on what it sees
+# ============================================================
+def suggest_strategies(rooms_data):
+    """
+    Analyses current hostel state and suggests the most
+    relevant strategies. Returns ranked list with reasons.
+    """
+    total_rooms = 0
+    empty_wastage_rooms = 0
+    high_temp_rooms = 0
+    occupied_rooms = 0
+    night_fan_rooms = 0
+
+    current_hour = datetime.now().hour
+    is_night = current_hour >= 23 or current_hour <= 5
+
+    for block, rooms in rooms_data.items():
+        for room_id, room in rooms.items():
+            total_rooms += 1
+            occupied = room.get("occupancy", 0) == 1
+            temp = room.get("temperature", 28)
+            fan_on = room.get("fan", 0) == 1
+            wastage = room.get("wastage", False)
+
+            if occupied:
+                occupied_rooms += 1
+            if wastage:
+                empty_wastage_rooms += 1
+            if occupied and temp > 28 and fan_on:
+                high_temp_rooms += 1
+            if occupied and fan_on and is_night:
+                night_fan_rooms += 1
+
+    wastage_pct = (empty_wastage_rooms / total_rooms * 100) if total_rooms > 0 else 0
+
+    suggestions = []
+
+    # Suggest Empty Room Cutoff if wastage is significant
+    if wastage_pct >= 10:
+        suggestions.append({
+            "strategyId": 1,
+            "strategyName": "Empty Room Cutoff",
+            "reason": (
+                f"{empty_wastage_rooms} out of {total_rooms} rooms "
+                f"({wastage_pct:.0f}%) currently have appliances "
+                f"running in empty rooms. Immediate cutoff recommended."
+            ),
+            "urgency": "HIGH" if wastage_pct >= 20 else "MEDIUM",
+            "estimatedImpact": f"{wastage_pct:.0f}% of current load is wastage"
+        })
+
+    # Suggest Night Mode if it's night and fans are running
+    if is_night and night_fan_rooms > 0:
+        suggestions.append({
+            "strategyId": 2,
+            "strategyName": "Night Mode (11PM - 5AM)",
+            "reason": (
+                f"It is currently {current_hour:02d}:00 and "
+                f"{night_fan_rooms} occupied rooms have fans "
+                f"running at full speed. Night mode will reduce "
+                f"fan power to 35W without affecting comfort."
+            ),
+            "urgency": "MEDIUM",
+            "estimatedImpact": f"{night_fan_rooms} fans can be reduced to low speed"
+        })
+
+    # Suggest Temperature-Based Control if temp is mild
+    avg_temp = 0
+    count = 0
+    for block, rooms in rooms_data.items():
+        for room_id, room in rooms.items():
+            avg_temp += room.get("temperature", 28)
+            count += 1
+    avg_temp = avg_temp / count if count > 0 else 28
+
+    if avg_temp <= 26:
+        suggestions.append({
+            "strategyId": 3,
+            "strategyName": "Temperature-Based Fan Control",
+            "reason": (
+                f"Current average room temperature is {avg_temp:.1f}°C "
+                f"which is below the 28°C comfort threshold. "
+                f"Fans in cooler rooms can be switched off safely."
+            ),
+            "urgency": "LOW",
+            "estimatedImpact": f"Average temp {avg_temp:.1f}°C — fan control viable"
+        })
+
+    # Always suggest Combined if multiple issues detected
+    if len(suggestions) >= 2:
+        suggestions.append({
+            "strategyId": 4,
+            "strategyName": "Combined Optimisation",
+            "reason": (
+                f"Multiple inefficiency patterns detected simultaneously: "
+                f"{empty_wastage_rooms} wastage rooms, "
+                f"{night_fan_rooms} night fans running. "
+                f"Combined strategy will maximise savings."
+            ),
+            "urgency": "HIGH",
+            "estimatedImpact": "Maximum possible energy reduction"
+        })
+
+    # If nothing detected — hostel is running efficiently
+    if not suggestions:
+        suggestions.append({
+            "strategyId": 0,
+            "strategyName": "No Action Needed",
+            "reason": (
+                f"Current hostel state is within normal parameters. "
+                f"Only {empty_wastage_rooms} wastage rooms detected. "
+                f"No immediate strategy intervention required."
+            ),
+            "urgency": "NONE",
+            "estimatedImpact": "System operating within BEE benchmark"
+        })
+
+    return {
+        "analysedAt": datetime.now().isoformat(),
+        "currentHour": current_hour,
+        "isNightTime": is_night,
+        "summary": {
+            "totalRooms": total_rooms,
+            "occupiedRooms": occupied_rooms,
+            "wastageRooms": empty_wastage_rooms,
+            "wastagePercent": round(wastage_pct, 1),
+            "avgTemperature": round(avg_temp, 1)
+        },
+        "suggestions": suggestions
     }

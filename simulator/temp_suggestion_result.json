@@ -1,0 +1,21 @@
+{
+  "analysedAt": "2026-03-26T18:31:51.596363",
+  "currentHour": 18,
+  "isNightTime": false,
+  "summary": {
+    "totalRooms": 40,
+    "occupiedRooms": 0,
+    "wastageRooms": 0,
+    "wastagePercent": 0.0,
+    "avgTemperature": 25.0
+  },
+  "suggestions": [
+    {
+      "strategyId": 3,
+      "strategyName": "Temperature-Based Fan Control",
+      "reason": "Current average room temperature is 25.0\u00b0C which is below the 28\u00b0C comfort threshold. Fans in cooler rooms can be switched off safely.",
+      "urgency": "LOW",
+      "estimatedImpact": "Average temp 25.0\u00b0C \u2014 fan control viable"
+    }
+  ]
+}
