@@ -9,13 +9,15 @@ export default function Navbar() {
           <b>GHS Twin</b>
         </h1>
 
-        <div className="space-x-6">
-          <Link to="/">Home</Link>
-          <Link to="/admin">Dashboard</Link>
-          <Link to="/map">Twin Map</Link>
-          <Link to="/boys">Boys</Link>
-          <Link to="/girls">Girls</Link>
-          <Link to="/simulation">Simulate</Link>
+        <div className="space-x-5 flex items-center text-sm">
+          <Link to="/" className="text-gray-600 hover:text-indigo-600">Home</Link>
+          <Link to="/admin" className="text-gray-600 hover:text-indigo-600">Dashboard</Link>
+          <Link to="/map" className="text-gray-600 hover:text-indigo-600">Twin Map</Link>
+          <Link to="/boys" className="text-gray-600 hover:text-indigo-600">Boys</Link>
+          <Link to="/girls" className="text-gray-600 hover:text-indigo-600">Girls</Link>
+          <Link to="/simulation" className="text-blue-600 font-semibold hover:text-blue-700">⚡ Simulate</Link>
+          <Link to="/comparison" className="text-purple-600 font-semibold hover:text-purple-700">📊 Compare</Link>
+          <Link to="/safety" className="text-red-600 font-semibold hover:text-red-700">🔌 Safety</Link>
         </div>
 
       </div>

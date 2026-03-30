@@ -1,46 +1,46 @@
 {
-  "strategyId": 2,
-  "strategyName": "Night Mode (11PM - 5AM)",
-  "strategyDescription": "Reduce all fans to low speed (35W) between 11PM and 5AM. Lights in common areas switched off. Students can override manually.",
-  "strategyType": "schedule",
-  "baseline_kWh_year": 13665.6,
-  "baseline_carbon_year": 11205.79,
-  "baseline_cost_year": 109324.8,
-  "optimised_kWh_year": 12745.8,
-  "optimised_carbon_year": 10451.56,
-  "optimised_cost_year": 101966.4,
-  "saved_kWh_year": 919.8,
-  "saved_carbon_year": 754.24,
-  "saved_cost_inr_year": 7358.4,
-  "reduction_pct": 6.7,
+  "strategyId": 1,
+  "strategyName": "Empty Room Cutoff",
+  "strategyDescription": "Immediately cut power to fans and lights in all unoccupied rooms. Appliances are turned off as soon as a room is detected empty.",
+  "strategyType": "occupancy",
+  "baseline_kWh_year": 10117.8,
+  "baseline_carbon_year": 8296.6,
+  "baseline_cost_year": 80942.4,
+  "optimised_kWh_year": 5518.8,
+  "optimised_carbon_year": 4525.42,
+  "optimised_cost_year": 44150.4,
+  "saved_kWh_year": 4599.0,
+  "saved_carbon_year": 3771.18,
+  "saved_cost_inr_year": 36792.0,
+  "reduction_pct": 45.5,
   "blockSavings": {
     "G1": {
-      "baselinePower_W": 520,
-      "optimisedPower_W": 473.33,
-      "savedPower_W": 46.67,
-      "savedEnergy_kWh_year": 306.6
+      "baselinePower_W": 470,
+      "optimisedPower_W": 290,
+      "savedPower_W": 180,
+      "savedEnergy_kWh_year": 1182.6
     },
     "G2": {
-      "baselinePower_W": 460,
-      "optimisedPower_W": 436.67,
-      "savedPower_W": 23.33,
-      "savedEnergy_kWh_year": 153.3
+      "baselinePower_W": 400,
+      "optimisedPower_W": 220,
+      "savedPower_W": 180,
+      "savedEnergy_kWh_year": 1182.6
     },
     "B1": {
-      "baselinePower_W": 490,
-      "optimisedPower_W": 455.0,
-      "savedPower_W": 35.0,
-      "savedEnergy_kWh_year": 229.95
+      "baselinePower_W": 340,
+      "optimisedPower_W": 260,
+      "savedPower_W": 80,
+      "savedEnergy_kWh_year": 525.6
     },
     "B2": {
-      "baselinePower_W": 610,
-      "optimisedPower_W": 575.0,
-      "savedPower_W": 35.0,
-      "savedEnergy_kWh_year": 229.95
+      "baselinePower_W": 330,
+      "optimisedPower_W": 70,
+      "savedPower_W": 260,
+      "savedEnergy_kWh_year": 1708.2
     }
   },
-  "recommendation": "CONSIDER",
-  "recommendationReason": "Low impact. Useful as supplementary measure.",
+  "recommendation": "STRONGLY RECOMMENDED",
+  "recommendationReason": "High impact. Significant energy and carbon reduction.",
   "beeCompliant": true,
   "dataSources": [
     "CEA India Grid Emission Factor 2023: 0.82 kg CO2/kWh",
@@ -50,23 +50,37 @@
     "NBC India 2016: Temperature threshold 28\u00b0C"
   ],
   "baselineMetrics": {
-    "totalPower_W": 2080,
-    "wastagePower_W": 0,
-    "wastageRooms": [],
-    "wastageRoomCount": 0,
-    "baseline_kWh_day": 37.44,
-    "baseline_kWh_year": 13665.6,
-    "wastage_kWh_day": 0.0,
-    "wastage_kWh_year": 0.0,
-    "carbon_kg_day": 30.701,
-    "carbon_kg_year": 11205.79,
-    "cost_inr_day": 299.52,
-    "cost_inr_year": 109324.8,
+    "totalPower_W": 1540,
+    "wastagePower_W": 700,
+    "wastageRooms": [
+      "G1-2",
+      "G1-8",
+      "G1-10",
+      "G2-3",
+      "G2-7",
+      "G2-9",
+      "B1-4",
+      "B1-5",
+      "B2-3",
+      "B2-4",
+      "B2-5",
+      "B2-6",
+      "B2-10"
+    ],
+    "wastageRoomCount": 13,
+    "baseline_kWh_day": 27.72,
+    "baseline_kWh_year": 10117.8,
+    "wastage_kWh_day": 12.6,
+    "wastage_kWh_year": 4599.0,
+    "carbon_kg_day": 22.73,
+    "carbon_kg_year": 8296.6,
+    "cost_inr_day": 221.76,
+    "cost_inr_year": 80942.4,
     "blockPower_W": {
-      "G1": 520,
-      "G2": 460,
-      "B1": 490,
-      "B2": 610
+      "G1": 470,
+      "G2": 400,
+      "B1": 340,
+      "B2": 330
     },
     "beeCompliant": true
   }
