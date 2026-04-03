@@ -1,21 +1,21 @@
 {
-  "analysedAt": "2026-03-26T18:31:51.596363",
-  "currentHour": 18,
+  "analysedAt": "2026-04-01T16:15:52.207244",
+  "currentHour": 16,
   "isNightTime": false,
   "summary": {
     "totalRooms": 40,
-    "occupiedRooms": 0,
-    "wastageRooms": 0,
-    "wastagePercent": 0.0,
-    "avgTemperature": 25.0
+    "occupiedRooms": 23,
+    "wastageRooms": 3,
+    "wastagePercent": 7.5,
+    "avgTemperature": 30.4
   },
   "suggestions": [
     {
-      "strategyId": 3,
-      "strategyName": "Temperature-Based Fan Control",
-      "reason": "Current average room temperature is 25.0\u00b0C which is below the 28\u00b0C comfort threshold. Fans in cooler rooms can be switched off safely.",
-      "urgency": "LOW",
-      "estimatedImpact": "Average temp 25.0\u00b0C \u2014 fan control viable"
+      "strategyId": 0,
+      "strategyName": "No Action Needed",
+      "reason": "Current hostel state is within normal parameters. Only 3 wastage rooms detected. No immediate strategy intervention required.",
+      "urgency": "NONE",
+      "estimatedImpact": "System operating within BEE benchmark"
     }
   ]
 }

@@ -381,7 +381,7 @@ app.post("/simulate", (req, res) => {
 
   fs.writeFileSync(tempInput, JSON.stringify({ strategyId, roomsData }, null, 2));
 
-  const pythonPath = path.join(__dirname, "../simulator/venv/Scripts/python.exe");
+  const pythonPath = path.join(__dirname, "../simulator/venv/bin/python");
   const scriptPath = path.join(__dirname, "../simulator/run_simulation.py");
 
   execFile(pythonPath, [scriptPath], { timeout: 15000 }, (err, stdout, stderr) => {
