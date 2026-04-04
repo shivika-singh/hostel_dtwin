@@ -174,15 +174,183 @@ export default function Simulation() {
 
         {/* RIGHT — RESULTS */}
         <div>
-          {!result && !loading && (
-            <div className="h-full flex items-center justify-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-              <div className="text-center text-gray-400 py-16">
-                <p className="text-4xl mb-3">📊</p>
-                <p className="font-medium">Select a strategy and run simulation</p>
-                <p className="text-sm mt-1">Results will appear here</p>
+          {result && !loading && (
+  <div className="space-y-4">
+    {/* Header */}
+    <div className="bg-white rounded-xl border p-4">
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="font-bold text-gray-800 text-lg">
+            {ICONS[result.strategyId]} {result.strategyName}
+          </h3>
+          <p className="text-gray-500 text-xs mt-1">{result.strategyDescription}</p>
+        </div>
+        <span className={`border text-sm font-bold px-3 py-1 rounded-full ${
+          COLORS[result.recommendation] || "bg-gray-100 text-gray-700 border-gray-300"
+        }`}>
+          {result.recommendation}
+        </span>
+      </div>
+      <p className="text-xs text-gray-500 mt-2 italic">{result.recommendationReason}</p>
+    </div>
+
+    {/* Reduction Badge */}
+    <div className={`rounded-xl p-4 text-center border ${
+      Number(result.reduction_pct) > 20 ? "bg-green-50 border-green-200" :
+      Number(result.reduction_pct) > 0  ? "bg-yellow-50 border-yellow-200" :
+      "bg-red-50 border-red-200"}`}>
+      <p className="text-5xl font-black">
+        {Number(result.reduction_pct) > 0 ? "↓" : "↑"}{" "}
+        {isNaN(Number(result.reduction_pct)) ? "0" : Math.abs(Number(result.reduction_pct)).toFixed(1)}%
+      </p>
+      <p className="text-sm text-gray-600 mt-1">Annual Energy Reduction</p>
+    </div>
+
+    {/* Metrics Grid */}
+    <div className="grid grid-cols-3 gap-3">
+      {[
+        {
+          label: "Energy Saved",
+          value: isNaN(Number(result.saved_kWh_year))
+            ? "—" : `${Number(result.saved_kWh_year).toLocaleString()} kWh`,
+          unit: "/year", bg: "bg-blue-50", text: "text-blue-700"
+        },
+        {
+          label: "Carbon Saved",
+          value: isNaN(Number(result.saved_carbon_year))
+            ? "—" : `${Number(result.saved_carbon_year).toLocaleString()} kg`,
+          unit: "CO₂/year", bg: "bg-green-50", text: "text-green-700"
+        },
+        {
+          label: "Cost Saved",
+          value: isNaN(Number(result.saved_cost_inr_year))
+            ? "—" : `₹${Number(result.saved_cost_inr_year).toLocaleString()}`,
+          unit: "/year", bg: "bg-purple-50", text: "text-purple-700"
+        },
+      ].map((m, i) => (
+        <div key={i} className={`${m.bg} border rounded-xl p-3 text-center`}>
+          <p className={`text-lg font-bold ${m.text}`}>{m.value}</p>
+          <p className="text-xs text-gray-500">{m.unit}</p>
+          <p className="text-xs text-gray-400 mt-1">{m.label}</p>
+        </div>
+      ))}
+    </div>
+
+    {/* Baseline vs Optimised */}
+    <div className="bg-white border rounded-xl p-4">
+      <h4 className="font-semibold text-gray-700 text-sm mb-3">
+        Baseline vs Optimised (Annual)
+      </h4>
+      {[
+        {
+          label: "Energy",
+          baseline: Number(result.baseline_kWh_year) || 0,
+          optimised: Number(result.optimised_kWh_year) || 0,
+          unit: "kWh"
+        },
+        {
+          label: "Carbon",
+          baseline: Number(result.baseline_carbon_year) || 0,
+          optimised: Number(result.optimised_carbon_year) || 0,
+          unit: "kg CO₂"
+        },
+        {
+          label: "Cost",
+          baseline: Number(result.baseline_cost_year) || 0,
+          optimised: Number(result.optimised_cost_year) || 0,
+          unit: "₹"
+        },
+      ].map((row, i) => {
+        const pct = row.baseline > 0
+          ? Math.min(100, (row.optimised / row.baseline) * 100)
+          : 50;
+        return (
+          <div key={i} className="mb-3">
+            <div className="flex justify-between text-xs text-gray-500 mb-1">
+              <span>{row.label}</span>
+              <span>
+                {row.optimised.toLocaleString()} / {row.baseline.toLocaleString()} {row.unit}
+              </span>
+            </div>
+            <div className="w-full bg-gray-100 rounded-full h-2">
+              <div
+                className="bg-blue-500 h-2 rounded-full transition-all"
+                style={{ width: `${pct}%` }}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    {/* Block Savings */}
+    {result.blockSavings && Object.keys(result.blockSavings).length > 0 && (
+      <div className="bg-white border rounded-xl p-4">
+        <h4 className="font-semibold text-gray-700 text-sm mb-3">
+          Block-wise Savings (kWh/year)
+        </h4>
+        {Object.entries(result.blockSavings).map(([block, data]) => {
+          const saved = Number(data.savedEnergy_kWh_year) || 0;
+          const maxSaved = 2000;
+          return (
+            <div key={block} className="mb-2">
+              <div className="flex justify-between text-xs mb-1">
+                <span className="font-medium">{block}</span>
+                <span className="text-green-600">↓ {saved.toLocaleString()} kWh</span>
+              </div>
+              <div className="w-full bg-gray-100 rounded-full h-1.5">
+                <div
+                  className="bg-green-500 h-1.5 rounded-full"
+                  style={{ width: `${Math.min(100, (saved / maxSaved) * 100)}%` }}
+                />
               </div>
             </div>
-          )}
+          );
+        })}
+      </div>
+    )}
+
+    {/* BEE Compliance */}
+    <div className={`rounded-xl border p-3 flex items-center gap-3 ${
+      result.beeCompliant
+        ? "bg-green-50 border-green-200"
+        : "bg-red-50 border-red-200"}`}>
+      <span className="text-2xl">{result.beeCompliant ? "✅" : "❌"}</span>
+      <div>
+        <p className="font-semibold text-sm">
+          {result.beeCompliant ? "BEE Compliant" : "BEE Non-Compliant"}
+        </p>
+        <p className="text-xs text-gray-500">
+          Benchmark: 15–25 kWh/person/month (Bureau of Energy Efficiency, India)
+        </p>
+      </div>
+    </div>
+
+    {/* Action Buttons */}
+    <div className="grid grid-cols-2 gap-3">
+      <button
+        onClick={applyStrategy}
+        className="py-2.5 rounded-xl bg-yellow-500 hover:bg-yellow-600
+                   text-white font-semibold text-sm transition-all"
+      >
+        🔧 Apply to Digital Twin
+      </button>
+      <button
+        onClick={deployStrategy}
+        className="py-2.5 rounded-xl bg-green-600 hover:bg-green-700
+                   text-white font-semibold text-sm transition-all"
+      >
+        🚀 Deploy as Policy
+      </button>
+    </div>
+
+    {deployed && (
+      <div className="bg-green-50 border border-green-200 rounded-xl p-3 text-sm text-green-700">
+        ✅ Strategy deployed at {new Date(deployed.deployedAt).toLocaleTimeString()}
+      </div>
+    )}
+  </div>
+)}
 
           {loading && (
             <div className="h-full flex items-center justify-center bg-blue-50 rounded-xl border-2 border-blue-100">

@@ -517,6 +517,44 @@ app.post("/deploy-strategy", (req, res) => {
     deployedAt: digitalTwin.appliedStrategy.deployedAt
   });
 });
+// POST /predict — LSTM occupancy predictions for all rooms
+app.post("/predict", (req, res) => {
+  const roomsData = {};
+  Object.entries(digitalTwin.blocks).forEach(([block, data]) => {
+    roomsData[block] = data.rooms;
+  });
+
+  const tempInput  = path.join(__dirname, "../simulator/temp_predict_input.json");
+  const tempOutput = path.join(__dirname, "../simulator/temp_predict_output.json");
+
+  fs.writeFileSync(tempInput, JSON.stringify({ roomsData }, null, 2));
+
+  const pythonPath = path.join(__dirname, "../simulator/venv/bin/python3");
+  const scriptPath = path.join(__dirname, "../simulator/run_prediction.py");
+
+  execFile(pythonPath, [scriptPath], { timeout: 15000 }, (err, stdout, stderr) => {
+    if (err) {
+      return res.status(500).json({ error: "Prediction failed", detail: stderr });
+    }
+    try {
+      const result = JSON.parse(fs.readFileSync(tempOutput, "utf8"));
+      res.json(result);
+    } catch (e) {
+      res.status(500).json({ error: "Could not parse prediction result" });
+    }
+  });
+});
+
+// GET /lstm-status — model info
+app.get("/lstm-status", (req, res) => {
+  const resultsPath = path.join(__dirname, "../simulator/lstm_results.json");
+  try {
+    const results = JSON.parse(fs.readFileSync(resultsPath, "utf8"));
+    res.json({ loaded: true, ...results });
+  } catch {
+    res.json({ loaded: false, message: "Model not trained yet" });
+  }
+});
 /* =======================
    START SERVER
 ======================= */
