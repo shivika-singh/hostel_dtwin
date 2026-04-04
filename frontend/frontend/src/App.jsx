@@ -10,6 +10,7 @@ import FloorMap from "./pages/FloorMap";
 import Simulation from "./pages/Simulation";
 import Comparison from "./pages/Comparison";
 import Safety from "./pages/Safety";
+import Prediction from "./pages/Prediction";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
         <Route path="/simulation" element={<Simulation />} />
         <Route path="/comparison" element={<Comparison />} />
         <Route path="/safety"     element={<Safety />} />
+        <Route path="/prediction" element={<Prediction />} />
       </Routes>
     </div>
   );

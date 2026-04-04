@@ -15,9 +15,10 @@ export default function Navbar() {
           <Link to="/map" className="text-gray-600 hover:text-indigo-600">Twin Map</Link>
           <Link to="/boys" className="text-gray-600 hover:text-indigo-600">Boys</Link>
           <Link to="/girls" className="text-gray-600 hover:text-indigo-600">Girls</Link>
-          <Link to="/simulation" className="text-blue-600 font-semibold hover:text-blue-700">⚡ Simulate</Link>
-          <Link to="/comparison" className="text-purple-600 font-semibold hover:text-purple-700">📊 Compare</Link>
-          <Link to="/safety" className="text-red-600 font-semibold hover:text-red-700">🔌 Safety</Link>
+          <Link to="/simulation" className="text-gray-600 hover:text-indigo-600"> Simulate</Link>
+          <Link to="/comparison" className="text-gray-600 hover:text-indigo-600">Compare</Link>
+          <Link to="/safety" className="text-gray-600 hover:text-indigo-600">Safety</Link>
+          <Link to="/prediction" className= "text-gray-600 hover:text-indigo-600">Predict</Link>
         </div>
 
       </div>
