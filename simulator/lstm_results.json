@@ -1,0 +1,31 @@
+{
+  "accuracy_pct": 76.16,
+  "auc_roc_pct": 68.14,
+  "test_samples": 69048,
+  "train_samples": 276192,
+  "sequence_len": 12,
+  "horizon_steps": 6,
+  "horizon_mins": 30,
+  "epochs_trained": 16,
+  "final_val_loss": 0.5235,
+  "confusion_matrix": [
+    [
+      3229,
+      14371
+    ],
+    [
+      2092,
+      49356
+    ]
+  ],
+  "features_used": [
+    "hour",
+    "dow",
+    "temperature",
+    "co2",
+    "light",
+    "fan",
+    "power",
+    "occupancy"
+  ]
+}

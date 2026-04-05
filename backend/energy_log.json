@@ -2088,6 +2088,998 @@
           "occupiedRooms": 5
         }
       }
+    },
+    {
+      "timestamp": "2026-04-03T09:50:10.005Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T10:20:04.990Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T10:55:14.991Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T11:27:34.803Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T12:07:03.643Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T12:49:15.972Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T13:24:35.728Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T14:34:32.768Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T15:53:03.712Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T17:03:48.655Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T18:27:08.434Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T19:39:36.174Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T20:57:20.368Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T22:16:13.170Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-03T23:43:32.877Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T00:44:32.321Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T01:45:34.281Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T03:04:22.990Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T04:20:56.743Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T05:49:32.095Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T06:43:53.561Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T17:58:19.296Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T18:28:14.315Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T20:29:23.565Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T21:48:19.135Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-04T23:04:37.043Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-05T00:22:00.811Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-05T01:34:32.592Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-05T02:35:32.325Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-05T04:09:05.072Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-04-05T05:26:50.686Z",
+      "totalPower_W": 0,
+      "wastagePower_W": 0,
+      "wastageRooms": 0,
+      "energy_kWh_this_interval": 0,
+      "carbon_kg_this_interval": 0,
+      "cost_inr_this_interval": 0,
+      "appliedStrategy": null,
+      "blockData": {
+        "G1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "G2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B1": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        },
+        "B2": {
+          "power_W": 0,
+          "wastageRooms": 0,
+          "occupiedRooms": 0
+        }
+      }
     }
   ]
 }

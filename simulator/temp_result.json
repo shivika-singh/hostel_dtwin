@@ -1,46 +1,46 @@
 {
-  "strategyId": 2,
-  "strategyName": "Night Mode (11PM - 5AM)",
-  "strategyDescription": "Reduce all fans to low speed (35W) between 11PM and 5AM.",
-  "strategyType": "schedule",
-  "baseline_kWh_year": 16819.2,
-  "baseline_carbon_year": 13791.74,
-  "baseline_cost_year": 134553.6,
-  "optimised_kWh_year": 14979.6,
-  "optimised_carbon_year": 12283.27,
-  "optimised_cost_year": 119836.8,
-  "saved_kWh_year": 1839.6,
-  "saved_carbon_year": 1508.47,
-  "saved_cost_inr_year": 14716.8,
-  "reduction_pct": 10.9,
+  "strategyId": 4,
+  "strategyName": "Combined Optimisation",
+  "strategyDescription": "Applies strategies 1+2+3 simultaneously for maximum reduction.",
+  "strategyType": "combined",
+  "baseline_kWh_year": 0.0,
+  "baseline_carbon_year": 0.0,
+  "baseline_cost_year": 0.0,
+  "optimised_kWh_year": 0.0,
+  "optimised_carbon_year": 0.0,
+  "optimised_cost_year": 0.0,
+  "saved_kWh_year": 0.0,
+  "saved_carbon_year": 0.0,
+  "saved_cost_inr_year": 0.0,
+  "reduction_pct": 0,
   "blockSavings": {
     "G1": {
-      "baselinePower_W": 580,
-      "optimisedPower_W": 510.0,
-      "savedPower_W": 70.0,
-      "savedEnergy_kWh_year": 459.9
+      "baselinePower_W": 0,
+      "optimisedPower_W": 0,
+      "savedPower_W": 0,
+      "savedEnergy_kWh_year": 0.0
     },
     "G2": {
-      "baselinePower_W": 590,
-      "optimisedPower_W": 531.67,
-      "savedPower_W": 58.33,
-      "savedEnergy_kWh_year": 383.25
+      "baselinePower_W": 0,
+      "optimisedPower_W": 0,
+      "savedPower_W": 0,
+      "savedEnergy_kWh_year": 0.0
     },
     "B1": {
-      "baselinePower_W": 690,
-      "optimisedPower_W": 608.33,
-      "savedPower_W": 81.67,
-      "savedEnergy_kWh_year": 536.55
+      "baselinePower_W": 0,
+      "optimisedPower_W": 0,
+      "savedPower_W": 0,
+      "savedEnergy_kWh_year": 0.0
     },
     "B2": {
-      "baselinePower_W": 700,
-      "optimisedPower_W": 630.0,
-      "savedPower_W": 70.0,
-      "savedEnergy_kWh_year": 459.9
+      "baselinePower_W": 0,
+      "optimisedPower_W": 0,
+      "savedPower_W": 0,
+      "savedEnergy_kWh_year": 0.0
     }
   },
-  "recommendation": "RECOMMENDED",
-  "recommendationReason": "Moderate impact. Good balance of savings and comfort.",
+  "recommendation": "LOW IMPACT",
+  "recommendationReason": "Minimal savings detected under current conditions.",
   "beeCompliant": true,
   "dataSources": [
     "CEA India Grid Emission Factor 2023: 0.82 kg CO2/kWh",
@@ -50,28 +50,23 @@
     "NBC India 2016: Temperature threshold 28\u00b0C"
   ],
   "baselineMetrics": {
-    "totalPower_W": 2560,
-    "wastagePower_W": 220,
-    "wastageRooms": [
-      "G1-4",
-      "B2-1",
-      "B2-3",
-      "B2-9"
-    ],
-    "wastageRoomCount": 4,
-    "baseline_kWh_day": 46.08,
-    "baseline_kWh_year": 16819.2,
-    "wastage_kWh_day": 3.96,
-    "wastage_kWh_year": 1445.4,
-    "carbon_kg_day": 37.786,
-    "carbon_kg_year": 13791.74,
-    "cost_inr_day": 368.64,
-    "cost_inr_year": 134553.6,
+    "totalPower_W": 0,
+    "wastagePower_W": 0,
+    "wastageRooms": [],
+    "wastageRoomCount": 0,
+    "baseline_kWh_day": 0.0,
+    "baseline_kWh_year": 0.0,
+    "wastage_kWh_day": 0.0,
+    "wastage_kWh_year": 0.0,
+    "carbon_kg_day": 0.0,
+    "carbon_kg_year": 0.0,
+    "cost_inr_day": 0.0,
+    "cost_inr_year": 0.0,
     "blockPower_W": {
-      "G1": 580,
-      "G2": 590,
-      "B1": 690,
-      "B2": 700
+      "G1": 0,
+      "G2": 0,
+      "B1": 0,
+      "B2": 0
     },
     "beeCompliant": true
   }
